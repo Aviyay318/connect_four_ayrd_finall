@@ -15,7 +15,8 @@ class Game extends React.Component{
         rowIndexOnBoard:[],
         lastMove:{row:"",column:""},
         connectFourWin:4,
-        winning:{winner:"",won:false,draw:false}
+        winning:{winner:"",won:false,draw:false},
+        draw:0
     }
     setBoardSize=(key,event)=>{
         this.setState({[key]:event.target.value})
@@ -52,6 +53,7 @@ class Game extends React.Component{
 
     }
     setMove=(colIndex)=>{
+        let draw= this.state.draw;
         const tempBoard= this.state.board;
         const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
         const row = tempRowIndexOnBoard[colIndex];
@@ -61,9 +63,10 @@ class Game extends React.Component{
             cell.painted=true;
             const player =  this.state.isPlayerOneTurn?this.state.player1:this.state.player2
             player.chip++;
+            draw++;
             tempRowIndexOnBoard[colIndex]>0&&tempRowIndexOnBoard[colIndex]--
             this.state.isPlayerOneTurn?this.setState({Player1:player}):this.setState({Player2:player})
-            this.setState({board:tempBoard,isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,lastMove:{row:row,column:colIndex}},()=>{
+            this.setState({board:tempBoard,draw:draw,isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,lastMove:{row:row,column:colIndex}},()=>{
                 this.checkWinner();
             })
 
@@ -73,13 +76,21 @@ class Game extends React.Component{
 
 
     }
-    checkWinner=()=>{
+    checkWinner = () => {
         this.checkRow();
-        this.state.winning.won===false&& this.checkCol();
-        this.state.winning.won===false&&this.checkDiagonalsForWin()
+        if (!this.state.winning.won) {
+            this.checkCol();
+        }
+        if (!this.state.winning.won) {
+            this.checkDiagonalsForWin();
+        }
+        if (this.state.draw === this.state.row * this.state.column) {
+            this.setState({ winning: { winner: "", won: false, draw: true } });
+        }
 
-
+        console.log(this.state.winning);
     }
+
     getCurrentPlayerColor=()=>{
       return this.state.isPlayerOneTurn?this.state.player1.color:this.state.player2.color
     }
@@ -149,7 +160,6 @@ class Game extends React.Component{
         let color="transparent";
         const row=this.state.lastMove.row;
         for (let i=0;i<this.state.column-1;i++) {
-            console.log(this.state.board[row][i].color+ "1")
             if (this.state.board[row][i].color!=="transparent") {
                 this.state.board[row][i].color===this.state.board[row][i+1].color? counter++ : counter=1;
             if (counter===this.state.connectFourWin){
@@ -167,11 +177,13 @@ class Game extends React.Component{
     }
     undo=()=>{
         const board = this.state.board;
+        let draw = this.state.draw;
+        draw--;
         board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
         board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
         const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
         tempRowIndexOnBoard[this.state.lastMove.column]++;
-        this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard})
+        this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw})
 
     }
     render() {
@@ -183,7 +195,11 @@ class Game extends React.Component{
                         <div>
                             <div>
                                 {
-                                    this.state.winning.won?
+                                    this.state.winning.draw?
+                                        <div>
+                                            <h1>No one won</h1>
+                                        </div>
+                                : this.state.winning.won?
                                      <div>
                                          <h1>The Winner: {this.state.winning.winner}</h1>
                                      </div>:
@@ -191,7 +207,6 @@ class Game extends React.Component{
                                             <h1>Player turn:  <label style={{color:this.state.isPlayerOneTurn?this.state.player1.color:this.state.player2.color}}> {this.state.isPlayerOneTurn?this.state.player1.name:this.state.player2.name}</label></h1>
                                         </div>
                                 }
-
                                 {/*<button>You You could’ve won</button>*/}
                                 {/*<button>Reverse</button>*/}
                             </div>
