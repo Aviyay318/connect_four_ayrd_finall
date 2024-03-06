@@ -47,10 +47,8 @@ function GameSetting(props) {
              <div>
                  <span>Row: </span> <input type={"number"} value={props.row} onChange={(event)=>{props.setBoardSize("row",event)}}/>
              </div>
-             {validBoardSize()&&<label style={{color:"red"}}>Please choose a row or column between 4 and 10!</label>}
-
          </div>
-         <button disabled={validBoardSize()||players[0].name.length===0||players[1].name.length===0} onClick={()=>props.setStartGame(true)}>Start Game</button>
+         <button id={"start-game-button"} disabled={validBoardSize()||players[0].name.length===0||players[1].name.length===0} onClick={()=>props.startGame(true)}>Start Game</button>
         </div>
     )
 

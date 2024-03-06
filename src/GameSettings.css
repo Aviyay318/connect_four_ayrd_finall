@@ -1,0 +1,86 @@
+:root{
+    --color: red;
+    --color-transparent: --color+00;
+}
+#game-settings-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#player-settings-table, td, tr {
+    border: 1px solid white;
+    width: 1400px;
+    height: 100px;
+    border-collapse: collapse;
+}
+
+.player-settings-table-header{
+    font-size: 20px;
+}
+.board-settings-table-header-header{
+    font-size: 20px;
+}
+.player-settings-input-field, .board-settings-input-field{
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    box-shadow: 0 0 15px var(--color);
+    animation: box-shadow-breathing 5s ease-in-out infinite;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+
+}
+.player-settings-input-field{
+    width: 200px;
+    height: 50px;
+
+}
+.board-settings-input-field{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+#board-settings-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#start-game-button{
+    width: 100px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    box-shadow: 0 0 15px var(--color);
+    animation: box-shadow-breathing 5s ease-in-out infinite;
+}
+
+@keyframes box-shadow-breathing {
+    50% {
+        box-shadow: 2px 2px 16px var(--color);
+    }
+}
+
+@keyframes colorPickerZoomInAnimation {
+    from {
+        transform: scale(1,1);
+    }
+    to {
+        transform: scale(1.2,1.2);
+    }
+}
+@keyframes colorPickerZoomOutAnimation {
+    from {
+        transform: scale(1.2,1.2);
+    }
+    to {
+        transform: scale(1,1);
+    }
+}

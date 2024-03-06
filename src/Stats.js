@@ -3,10 +3,12 @@ import React from "react";
 function Stats(props) {
     return (
         <div>
-            <h3>State</h3>
             <div>
                 {
                     <table>
+                        <tr>
+                            <th colSpan={"3"}>Stats</th>
+                        </tr>
                         <tr>
                             <td></td>
                             <td>Chips</td>

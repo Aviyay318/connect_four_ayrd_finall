@@ -14,7 +14,7 @@ function GameBoard(props){
                                row.map((col,colIndex)=>{
                                    return(
                                        <div className={"square"}>
-                                           <span style={{background:col.color }} onClick={()=>{props.setMove(col)}} className={"circle"} ></span>
+                                           <span style={{background:col.color }} onClick={()=>{props.setMove(colIndex)}} className={"circle"} ></span>
                                        </div>
                                    )
                                })
