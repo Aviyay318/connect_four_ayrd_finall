@@ -3,10 +3,18 @@ import './App.css';
 import Game from "./Game";
 
 function App() {
+    const styles={
+        title:{fontSize: 60},
+        logo:{fontSize:15}
+    }
   return (
     <div className="App">
-     <h1>Connect Four</h1>
+     <h1 style={styles.title}>Connect Four</h1>
         <Game />
+        <br/>
+        <br/>
+        <div style={styles.logo}>Connect 4 | AYRD</div>
+
     </div>
   );
 }

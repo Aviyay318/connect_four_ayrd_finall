@@ -2,10 +2,13 @@ import './GameBoard.css';
 function GameBoard(props){
     const board = props.board;
 
+    const setStyleColor = {
+        "--color": props.getCurrentPlayerColor()
+    }
+
     return(
         <div>
-            <h1>Game Board</h1>
-            <div className={"firstDiv"}>
+            <div id={"board"} className={"firstDiv"} style={setStyleColor}>
             {
                 board.map((row,rowIndex)=>{
                     return(

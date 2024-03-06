@@ -1,25 +1,38 @@
+:root{
+    --color: white;
+    --color-transparent: --color+00;
+}
+
+#board{
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--color);
+}
 .square{
-    width: 38px;
-    height: 38px;
-    border: 1px solid black;
-    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border: 1px ridge white;
+    border-radius: 8%;
+    cursor: pointer;
 }
 
 .square,circle{
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(gray, gainsboro, gold, black);
-
+    background: transparent;
 }
 .circle{
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    border: 1px solid black;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background: transparent;
 }
 .square:hover{
-    background-color: gold;
+    background-color: var(--color);
 }
 .firstDiv{
     justify-content: center;
