@@ -7,6 +7,18 @@ function GameSetting(props) {
         (props.column<4||props.column>10||props.row<4||props.row>10)?result=true:result=false;
         return result;
     }
+
+    // const isInputValid=(cssVar,condition)=>{
+    //     if (condition){
+    //
+    //     }
+    // }
+    const changeBoardSettingsShadowBoxColorToRed = {
+        "--board-settings-input-color": "red"
+    }
+    const changeBoardSettingsShadowBoxColorToGreen = {
+        "--board-settings-input-color": "green"
+    }
     const zoomInOnEnter=(event)=>{
         event.currentTarget.style.animation = "colorPickerZoomInAnimation 0.1s ease"
         event.currentTarget.style.animationFillMode="forwards"
@@ -14,6 +26,9 @@ function GameSetting(props) {
     }
     const zoomOutOnExit = (event) => {
         event.currentTarget.style.animation = "colorPickerZoomOutAnimation 0.2s ease"
+    }
+    const styles={
+
     }
     return(
         <div id={"game-settings-container"}>
@@ -58,7 +73,7 @@ function GameSetting(props) {
                  <h3 className={"board-settings-table-header-header"}>Row: </h3> <input className={"board-settings-input-field"} type={"number"} value={props.row} onChange={(event)=>{props.setBoardSize("row",event)}}/>
              </div>
          </div>
-         <button id={"start-game-button"} disabled={validBoardSize()||players[0].name.length===0||players[1].name.length===0} onClick={()=>props.startGame(true)}>Start Game</button>
+         <button id={"start-game-button"} style={validBoardSize()?changeBoardSettingsShadowBoxColorToGreen:changeBoardSettingsShadowBoxColorToRed} disabled={validBoardSize()||players[0].name.length===0||players[1].name.length===0} onClick={()=>props.startGame(true)}>Start Game</button>
         </div>
     )
 
