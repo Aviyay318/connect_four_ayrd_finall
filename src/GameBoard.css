@@ -1,0 +1,28 @@
+.square{
+    width: 38px;
+    height: 38px;
+    border: 1px solid black;
+    background-color: black;
+}
+
+.square,circle{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(gray, gainsboro, gold, black);
+
+}
+.circle{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid black;
+}
+.square:hover{
+    background-color: gold;
+}
+.firstDiv{
+    justify-content: center;
+    align-items: center;
+
+}
