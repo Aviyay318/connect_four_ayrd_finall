@@ -220,9 +220,9 @@ class Game extends React.Component{
                                 </div>
 
                                 <div id={"buttons"}>
-                                    <button onClick={()=>this.undo()}>Undo</button>
-                                    <button onClick={()=>{this.setMatrixBoard();this.setIndexBoard()}}>Reset</button>
-                                    <button onClick={()=>this.newGame()}>New Game</button>
+                                    <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
+                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard();this.setIndexBoard()}}>Reset</button>
+                                    <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>
                                 </div>
                             </div>
                         </div>:
@@ -238,5 +238,9 @@ class Game extends React.Component{
         )
     }
 
+
+}
+const styles={
+    button:{width: 100, height: 50, border: "1 solid white"}
 }
 export default Game;
