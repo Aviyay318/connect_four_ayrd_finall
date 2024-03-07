@@ -206,7 +206,7 @@ class Game extends React.Component{
                 {
                     this.state.startGame?
                         <div>
-                            <div>
+                            <div id={"winner-state"}>
                                 {
                                     this.state.winning.draw?
                                         <div>
@@ -214,7 +214,7 @@ class Game extends React.Component{
                                         </div>
                                 : this.state.winning.won?
                                      <div>
-                                         <h1>The Winner: {this.state.winning.winner}</h1>
+                                         <h1 style={{fontSize:50}}>The Winner: {this.state.winning.winner}</h1>
                                      </div>:
                                         <div>
                                             <h1>Player turn:  <label style={{color:this.state.isPlayerOneTurn?this.state.player1.color:this.state.player2.color}}> {this.state.isPlayerOneTurn?this.state.player1.name:this.state.player2.name}</label></h1>
@@ -224,7 +224,7 @@ class Game extends React.Component{
                                 {/*<button>Reverse</button>*/}
                             </div>
                             <div id={"game-container"}>
-                                <div id={"stats-table"}>
+                                <div id={"stats-table-container"}>
                                     <Stats players={[this.state.player1,this.state.player2]} />
                                 </div>
 
@@ -232,7 +232,7 @@ class Game extends React.Component{
                                     <GameBoard board={this.state.board} getCurrentPlayerColor={this.getCurrentPlayerColor}setMove={this.setMove}/>
                                 </div>
 
-                                <div id={"buttons"}>
+                                <div id={"buttons-container"}>
                                     <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
                                     <button style={styles.button} onClick={()=>{this.setMatrixBoard();this.setIndexBoard();this.setWinning()}}>Reset</button>
                                     <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>

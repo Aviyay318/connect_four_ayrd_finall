@@ -1,11 +1,11 @@
 import React from "react";
-
+import "./Game.css"
 function Stats(props) {
     return (
         <div>
             <div>
                 {
-                    <table>
+                    <table id={"stats-table"}>
                         <tr>
                             <th colSpan={"3"}>Stats</th>
                         </tr>

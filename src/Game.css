@@ -7,11 +7,29 @@
     margin: 0;
     padding: 0;
 }
+#winner-state{
+    font-size: 20px;
+}
+
+#stats-table-container{
+    width: 400px;
+    height: 400px;
+}
 
 #stats-table,td,tr{
-    width: 300px;
-    height: 100px;
-    font-size: 15px;
+    width: 400px;
+    height: 10px;
+    font-size: 30px;
     border: 1px solid white;
     border-collapse: collapse;
+}
+#game-board{
+
+}
+#buttons-container{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
