@@ -229,12 +229,12 @@ class Game extends React.Component{
                                 </div>
 
                                 <div id={"game-board"}>
-                                    <GameBoard board={this.state.board} getCurrentPlayerColor={this.getCurrentPlayerColor}setMove={this.setMove}/>
+                                    <GameBoard board={this.state.board} getCurrentPlayerColor={this.getCurrentPlayerColor} setMove={this.setMove}/>
                                 </div>
 
                                 <div id={"buttons-container"}>
                                     <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
-                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard();this.setIndexBoard();this.setWinning()}}>Reset</button>
+                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard(); this.setIndexBoard(); this.setWinning()}}>Reset</button>
                                     <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>
                                 </div>
                             </div>
