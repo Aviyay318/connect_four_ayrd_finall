@@ -5,8 +5,8 @@ import GameBoard from "./GameBoard";
 import Stats from "./Stats";
 class Game extends React.Component{
     state={
-        player1:{name:"Aviya",color:"red",chip:0,score:0},
-        player2:{name:"Ram",color:"yellow",chip:0,score:0},
+        player1:{name:"r",color:"red",chip:0,score:0},
+        player2:{name:"w",color:"yellow",chip:0,score:0},
         board:[],
         row:4,
         column:4,
@@ -53,27 +53,34 @@ class Game extends React.Component{
 
     }
     setMove=(colIndex)=>{
-        let draw= this.state.draw;
-        const tempBoard= this.state.board;
-        const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
-        const row = tempRowIndexOnBoard[colIndex];
-        const cell = tempBoard[tempRowIndexOnBoard[colIndex]][colIndex];//find the cell in the column that not painted
-        if (!cell.painted){
-            cell.color=this.getCurrentPlayerColor()
-            cell.painted=true;
-            const player =  this.state.isPlayerOneTurn?this.state.player1:this.state.player2
-            player.chip++;
-            draw++;
-            tempRowIndexOnBoard[colIndex]>0&&tempRowIndexOnBoard[colIndex]--
-            this.state.isPlayerOneTurn?this.setState({Player1:player}):this.setState({Player2:player})
-            this.setState({board:tempBoard,draw:draw,isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,lastMove:{row:row,column:colIndex}},()=>{
-                this.checkWinner();
-            })
+        if (!this.state.winning.won) {
+            let draw = this.state.draw;
+            const tempBoard = this.state.board;
+            const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
+            const row = tempRowIndexOnBoard[colIndex];
+            const cell = tempBoard[tempRowIndexOnBoard[colIndex]][colIndex];//find the cell in the column that not painted
+            if (!cell.painted) {
+                cell.color = this.getCurrentPlayerColor()
+                cell.painted = true;
+                const player = this.state.isPlayerOneTurn ? this.state.player1 : this.state.player2
+                player.chip++;
+                draw++;
+                tempRowIndexOnBoard[colIndex] > 0 && tempRowIndexOnBoard[colIndex]--
+                this.state.isPlayerOneTurn ? this.setState({Player1: player}) : this.setState({Player2: player})
+                this.setState({
+                    board: tempBoard,
+                    draw: draw,
+                    isPlayerOneTurn: !this.state.isPlayerOneTurn,
+                    rowIndexOnBoard: tempRowIndexOnBoard,
+                    lastMove: {row: row, column: colIndex}
+                }, () => {
+                    this.checkWinner();
+                })
 
-        }else{
-            alert("The cell is busy, choose another cell please!")
+            } else {
+                alert("The cell is busy, choose another cell please!")
+            }
         }
-
 
     }
     checkWinner = () => {
@@ -174,6 +181,10 @@ class Game extends React.Component{
         this.startGame();
         this.setState({player1:{name:"",color:"red",chip:0,score:0},
             player2:{name:"",color:"yellow",chip:0,score:0}})
+        this.setWinning();
+    }
+    setWinning=()=>{
+        this.setState({winning:{winner:"",won:false,draw:false}})
     }
     undo=()=>{
         if (this.state.lastMove.row!==""&&this.state.lastMove.column!==""){
@@ -184,7 +195,7 @@ class Game extends React.Component{
             board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
             tempRowIndexOnBoard[this.state.lastMove.column]++;
-            this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw})
+            this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw,lastMove:{row:"",column:""}})
         }
 
     }
@@ -223,7 +234,7 @@ class Game extends React.Component{
 
                                 <div id={"buttons"}>
                                     <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
-                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard();this.setIndexBoard()}}>Reset</button>
+                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard();this.setIndexBoard();this.setWinning()}}>Reset</button>
                                     <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>
                                 </div>
                             </div>
@@ -243,6 +254,7 @@ class Game extends React.Component{
 
 }
 const styles={
-    button:{width: 100, height: 50, backgroundColor:"transparent"}
+    button:{border: "1px solid white", width: 150, height: 50, backgroundColor:"transparent",color: "white",fontSize:20}
+
 }
 export default Game;
