@@ -5,8 +5,8 @@ import GameBoard from "./GameBoard";
 import Stats from "./Stats";
 class Game extends React.Component{
     state={
-        player1:{name:"r",color:"red",chip:0,score:0},
-        player2:{name:"w",color:"yellow",chip:0,score:0},
+        player1:{name:"",color:"red",chip:0,score:0},
+        player2:{name:"",color:"yellow",chip:0,score:0},
         board:[],
         row:4,
         column:4,

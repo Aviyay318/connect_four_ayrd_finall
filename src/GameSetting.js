@@ -4,7 +4,7 @@ function GameSetting(props) {
     const colors = ["red","yellow","blue","black","pink","green"];
     function validBoardSize(){
         let result;
-        (props.column<4||props.column>10||props.row<4||props.row>10)?result=true:result=false;
+        (props.column<4||props.column>9||props.row<4||props.row>9)?result=true:result=false;
         return result;
     }
 
@@ -51,7 +51,7 @@ function GameSetting(props) {
                 </table>
             </div>
             <h2>Board Settings:</h2>
-            <label>Please choose a row or column between 4 and 10!</label>
+            <label>Please choose a row or column between 4 and 9!</label>
          <div id={"board-settings-container"}>
              <div>
                  <h3 className={"board-settings-table-header-header"}>Column: </h3> <input className={"board-settings-input-field"} style={props.column===0?{boxShadow:"0 0 15px red"}:{boxShadow:"0 0 15px green"}} type={"number"} value={props.column} onChange={(event)=>{props.setBoardSize("column",event)}}/>
