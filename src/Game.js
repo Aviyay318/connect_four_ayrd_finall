@@ -176,14 +176,16 @@ class Game extends React.Component{
             player2:{name:"",color:"yellow",chip:0,score:0}})
     }
     undo=()=>{
-        const board = this.state.board;
-        let draw = this.state.draw;
-        draw--;
-        board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
-        board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
-        const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
-        tempRowIndexOnBoard[this.state.lastMove.column]++;
-        this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw})
+        if (this.state.lastMove.row!==""&&this.state.lastMove.column!==""){
+            const board = this.state.board;
+            let draw = this.state.draw;
+            draw--;
+            board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
+            board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
+            const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
+            tempRowIndexOnBoard[this.state.lastMove.column]++;
+            this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw})
+        }
 
     }
     render() {
@@ -241,6 +243,6 @@ class Game extends React.Component{
 
 }
 const styles={
-    button:{width: 100, height: 50, border: "1 solid white"}
+    button:{width: 100, height: 50, backgroundColor:"transparent"}
 }
 export default Game;
