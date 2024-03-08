@@ -59,7 +59,6 @@ class Game extends React.Component{
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
             const row = tempRowIndexOnBoard[colIndex];
             const cell = tempBoard[tempRowIndexOnBoard[colIndex]][colIndex];//find the cell in the column that not painted
-            console.log(cell)
             if (!cell.painted) {
                 cell.color = this.getCurrentPlayerColor()
                 cell.painted = true;
@@ -264,7 +263,7 @@ colorWinner = (winPosition)=>{
                                 </div>
 
                                 <div id={"buttons-container"}>
-                                    <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
+                                    <button style={styles.button} disabled={this.state.winning.won} onClick={()=>this.undo()}>Undo</button>
                                     <button style={styles.button} onClick={()=>{this.setMatrixBoard(); this.setIndexBoard(); this.setWinning();this.setState({draw:0})}}>Reset</button>
                                     <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>
                                 </div>

@@ -54,10 +54,10 @@ function GameSetting(props) {
             <label>Please choose a row or column between 4 and 7!!!</label>
          <div id={"board-settings-container"}>
              <div>
-                 <h3 className={"board-settings-table-header-header"}>Column: </h3> <input className={"board-settings-input-field"} style={props.column===0?{boxShadow:"0 0 15px red"}:{boxShadow:"0 0 15px green"}} type={"number"} value={props.column} onChange={(event)=>{props.setBoardSize("column",event)}}/>
+                 <h3 className={"board-settings-table-header-header"}>Column: </h3> <input className={"board-settings-input-field"} style={props.column<4||props.column>7?{boxShadow:"0 0 15px red"}:{boxShadow:"0 0 15px green"}} type={"number"} value={props.column} onChange={(event)=>{props.setBoardSize("column",event)}}/>
              </div>
              <div>
-                 <h3 className={"board-settings-table-header-header"}>Row: </h3> <input className={"board-settings-input-field"} style={props.row===0?{boxShadow:"0 0 15px red"}:{boxShadow:"0 0 15px green"}} type={"number"} value={props.row} onChange={(event)=>{props.setBoardSize("row",event)}}/>
+                 <h3 className={"board-settings-table-header-header"}>Row: </h3> <input className={"board-settings-input-field"} style={props.row<4||props.row>7?{boxShadow:"0 0 15px red"}:{boxShadow:"0 0 15px green"}} type={"number"} value={props.row} onChange={(event)=>{props.setBoardSize("row",event)}}/>
              </div>
          </div>
          <button id={"start-game-button"} disabled={validBoardSize()||players[0].name.length===0||players[1].name.length===0} onClick={()=>props.startGame(true)}>Start Game</button>
