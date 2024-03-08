@@ -95,6 +95,7 @@ class Game extends React.Component{
     }
     checkDiagonalsForWin = () => {
         const { row, column, board} = this.state;
+        let winPosition = []
         for (let i = 0; i < row - 3; i++) {
             for (let j = 0; j < column - 3; j++) {
                 const color = board[i][j].color;
@@ -102,11 +103,17 @@ class Game extends React.Component{
                     color === board[i + 1][j + 1].color &&
                     color === board[i + 2][j + 2].color &&
                     color === board[i + 3][j + 3].color) {
-                   this.setWinner(color)
+                    winPosition.push({row:i,col:j})
+                    winPosition.push({row:i + 1,col:j + 1})
+                    winPosition.push({row:i + 2,col:j + 2})
+                    winPosition.push({row:i + 3,col:j + 3})
+                    this.colorWinner(winPosition)
+                    this.setWinner(color)
 
                 }
             }
         }
+        winPosition=[]
         for (let i = 0; i < row - 3; i++) {
             for (let j = column - 1; j >= 3; j--) {
                 const color = board[i][j].color;
@@ -114,6 +121,11 @@ class Game extends React.Component{
                     color === board[i + 1][j - 1].color &&
                     color === board[i + 2][j - 2].color &&
                     color === board[i + 3][j - 3].color) {
+                    winPosition.push({row:i,col:j})
+                    winPosition.push({row:i + 1,col:j - 1})
+                    winPosition.push({row:i + 2,col:j - 2})
+                    winPosition.push({row:i + 3,col:j - 3})
+                    this.colorWinner(winPosition)
                     this.setWinner(color)
                 }
             }
@@ -172,12 +184,20 @@ colorWinner = (winPosition)=>{
     checkRow=()=>{
         let counter=1;
         let color="transparent";
+        const winPosition = []
         const row=this.state.lastMove.row;
         for (let i=0;i<this.state.column-1;i++) {
             if (this.state.board[row][i].color!=="transparent") {
-                this.state.board[row][i].color===this.state.board[row][i+1].color? counter++ : counter=1;
+                if (this.state.board[row][i].color===this.state.board[row][i+1].color){
+                    counter++
+                    winPosition.push({row:row,col:i})
+                }else {
+                    counter=1;
+                }
             if (counter===this.state.connectFourWin){
                 color=this.state.board[this.state.lastMove.row][i].color;
+                winPosition.push({row:row,col:i+1})
+                this.colorWinner(winPosition)
                 this.setWinner(color)
             }
         }
