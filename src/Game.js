@@ -22,7 +22,7 @@ class Game extends React.Component{
         this.setState({[key]:event.target.value})
     }
     startGame=(value)=>{
-        this.setState({startGame:value,draw:0})
+        this.setState({startGame:value,draw:0,row:4,column:4})
         this.setMatrixBoard();
         this.setIndexBoard()
     }
@@ -59,6 +59,7 @@ class Game extends React.Component{
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
             const row = tempRowIndexOnBoard[colIndex];
             const cell = tempBoard[tempRowIndexOnBoard[colIndex]][colIndex];//find the cell in the column that not painted
+            console.log(cell)
             if (!cell.painted) {
                 cell.color = this.getCurrentPlayerColor()
                 cell.painted = true;
@@ -222,8 +223,10 @@ colorWinner = (winPosition)=>{
             board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
             board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
-            tempRowIndexOnBoard[this.state.lastMove.column]++;
-            this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw,lastMove:{row:"",column:""}})
+            const player = this.state.isPlayerOneTurn?this.state.player1:this.state.player2
+            player.chip--;
+            this.state.isPlayerOneTurn?this.setState({player1:player}):this.setState({player2:player})
+            this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw,lastMove:{row:"",column:""},board:board})
         }
 
     }
