@@ -103,10 +103,11 @@ class Game extends React.Component{
                     color === board[i + 1][j + 1].color &&
                     color === board[i + 2][j + 2].color &&
                     color === board[i + 3][j + 3].color) {
-                    winPosition.push({row:i,col:j})
-                    winPosition.push({row:i + 1,col:j + 1})
-                    winPosition.push({row:i + 2,col:j + 2})
-                    winPosition.push({row:i + 3,col:j + 3})
+                    const winPosition = Array.from({ length: 4 }, (_, index) => ({
+                        row: i + index,
+                        col: j + index
+                    }));
+
                     this.colorWinner(winPosition)
                     this.setWinner(color)
 
@@ -121,10 +122,10 @@ class Game extends React.Component{
                     color === board[i + 1][j - 1].color &&
                     color === board[i + 2][j - 2].color &&
                     color === board[i + 3][j - 3].color) {
-                    winPosition.push({row:i,col:j})
-                    winPosition.push({row:i + 1,col:j - 1})
-                    winPosition.push({row:i + 2,col:j - 2})
-                    winPosition.push({row:i + 3,col:j - 3})
+                    winPosition = Array.from({ length: 4 }, (_, index) => ({
+                        row: i + index,
+                        col: j - index
+                    }));
                     this.colorWinner(winPosition)
                     this.setWinner(color)
                 }
