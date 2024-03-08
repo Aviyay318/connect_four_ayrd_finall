@@ -85,17 +85,9 @@ class Game extends React.Component{
     }
     checkWinner = () => {
         this.checkRow();
-        if (!this.state.winning.won) {
-            this.checkCol();
-        }
-        if (!this.state.winning.won) {
-            this.checkDiagonalsForWin();
-        }
-        if (this.state.draw === this.state.row * this.state.column) {
-            this.setState({ winning: { winner: "", won: false, draw: true } });
-        }
-
-        console.log(this.state.winning);
+        !this.state.winning.won&& this.checkCol()
+        !this.state.winning.won&&this.checkDiagonalsForWin();
+        this.state.draw === this.state.row * this.state.column&& this.setState({ winning: { winner: "", won: false, draw: true } });
     }
 
     getCurrentPlayerColor=()=>{
@@ -139,17 +131,32 @@ class Game extends React.Component{
     //         }
     //     }, 1000);
     // }
-
+colorWinner = (winPosition)=>{
+        const board = this.state.board;
+    for (let i = 0; i < winPosition.length; i++) {
+        board[winPosition[i].row][winPosition[i].col].color="#F0F8FF"
+    }
+    this.setState({board})
+}
     checkCol=()=>{
         let counter=1;
         let color="transparent";
+        const winPosition = []
         const col=this.state.lastMove.column;
         for (let i=0;i<this.state.row-1;i++) {
             if (this.state.board[i][col].color!=="transparent")
             {
-               this.state.board[i][col].color===this.state.board[i+1][col].color? counter++: counter=1;
+                if ( this.state.board[i][col].color===this.state.board[i+1][col].color) {
+                    counter++
+                    winPosition.push({row:i,col:col})
+                }
+                else{
+                    counter=1;
+                }
             if (counter===this.state.connectFourWin){
                 color=this.state.board[this.state.lastMove.column][i].color;
+                winPosition.push({row:i+1,col:col})
+                this.colorWinner(winPosition)
                 this.setWinner(color)
 
             }
