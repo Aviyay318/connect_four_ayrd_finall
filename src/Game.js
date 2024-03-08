@@ -22,7 +22,7 @@ class Game extends React.Component{
         this.setState({[key]:event.target.value})
     }
     startGame=(value)=>{
-        this.setState({startGame:value})
+        this.setState({startGame:value,draw:0})
         this.setMatrixBoard();
         this.setIndexBoard()
     }
@@ -238,7 +238,7 @@ colorWinner = (winPosition)=>{
                                 {
                                     this.state.winning.draw?
                                         <div>
-                                            <h1>No one won</h1>
+                                            <h1>No one won!!</h1>
                                         </div>
                                 : this.state.winning.won?
                                      <div>
@@ -262,7 +262,7 @@ colorWinner = (winPosition)=>{
 
                                 <div id={"buttons-container"}>
                                     <button style={styles.button} onClick={()=>this.undo()}>Undo</button>
-                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard(); this.setIndexBoard(); this.setWinning()}}>Reset</button>
+                                    <button style={styles.button} onClick={()=>{this.setMatrixBoard(); this.setIndexBoard(); this.setWinning();this.setState({draw:0})}}>Reset</button>
                                     <button style={styles.button} onClick={()=>this.newGame()}>New Game</button>
                                 </div>
                             </div>
