@@ -222,6 +222,7 @@ colorWinner = (winPosition)=>{
             board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
             board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
+            tempRowIndexOnBoard[this.state.lastMove.column]++;
             const player = this.state.isPlayerOneTurn?this.state.player2:this.state.player1
             player.chip--;
             this.state.isPlayerOneTurn?this.setState({player2:player}):this.setState({player1:player})
