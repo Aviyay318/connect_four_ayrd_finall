@@ -167,7 +167,7 @@ colorWinner = (winPosition)=>{
                     counter=1;
                 }
             if (counter===this.state.connectFourWin){
-                color=this.state.board[this.state.lastMove.column][i].color;
+                color=this.state.board[i][this.state.lastMove.column].color;
                 winPosition.push({row:i+1,col:col})
                 this.colorWinner(winPosition)
                 this.setWinner(color)
