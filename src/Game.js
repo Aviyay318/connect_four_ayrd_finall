@@ -224,7 +224,7 @@ colorWinner = (winPosition)=>{
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
             const player = this.state.isPlayerOneTurn?this.state.player2:this.state.player1
             player.chip--;
-            this.state.isPlayerOneTurn?this.setState({player1:player}):this.setState({player2:player})
+            this.state.isPlayerOneTurn?this.setState({player2:player}):this.setState({player1:player})
             this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw,lastMove:{row:"",column:""},board:board})
         }
 
