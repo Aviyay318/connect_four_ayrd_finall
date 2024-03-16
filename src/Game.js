@@ -22,7 +22,7 @@ class Game extends React.Component{
         this.setState({[key]:event.target.value})
     }
     startGame=(value)=>{
-        this.setState({startGame:value,draw:0,row:4,column:4})
+        this.setState({startGame:value,draw:0})
         this.setMatrixBoard();
         this.setIndexBoard()
     }
@@ -222,7 +222,7 @@ colorWinner = (winPosition)=>{
             board[this.state.lastMove.row][this.state.lastMove.column].color="transparent";
             board[this.state.lastMove.row][this.state.lastMove.column].painted=false;
             const tempRowIndexOnBoard = this.state.rowIndexOnBoard;
-            const player = this.state.isPlayerOneTurn?this.state.player1:this.state.player2
+            const player = this.state.isPlayerOneTurn?this.state.player2:this.state.player1
             player.chip--;
             this.state.isPlayerOneTurn?this.setState({player1:player}):this.setState({player2:player})
             this.setState({isPlayerOneTurn:!this.state.isPlayerOneTurn,rowIndexOnBoard:tempRowIndexOnBoard,draw:draw,lastMove:{row:"",column:""},board:board})
